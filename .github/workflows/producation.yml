@@ -187,6 +187,17 @@ jobs:
        NODE_ENV=production
        VERSION=${{ env.VERSION }}
        BUILD_TIMESTAMP=${{ env.BUILD_TIMESTAMP }}
+       GITHUB_REPO=${{ github.repository }}
+       GITHUB_OWNER=${{ github.repository_owner }}
+       GITHUB_WORKFLOW_NAME=${{ github.workflow }}
+       GITHUB_PULL_REQUEST_NUMBER=${{ github.event.pull_request.number }}
+       GITHUB_REF_TYPE=${{ github.ref_type }}
+       GITHUB_REF_NAME=${{ github.ref_name }}
+       GITHUB_RUN_NUMBER=${{ github.run_number }}
+       GITHUB_RUN_ID=${{ github.run_id }}
+       GITHUB_RUN_ATTEMPT=${{ github.run_attempt }}
+       GITHUB_ACTOR=${{ github.actor }}
+       GITHUB_SHA=${{ github.sha }}
    - name: Move cache
      run: |
       rm -rf /tmp/.buildx-cache
