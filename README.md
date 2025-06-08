@@ -3,19 +3,35 @@
 **A lightweight Prometheus Alertmanager webhook that forwards alerts to [Gotify](https://gotify.net/) - perfect for homelabs, self-hosted setups, and production environments.**
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Docker Pulls](https://img.shields.io/docker/pulls/yourusername/alertmanager-gotify)](https://hub.docker.com/r/yourusername/alertmanager-gotify)
-[![Go Report Card](https://goreportcard.com/badge/github.com/munirmardinli/alertmanager-gotify)](https://goreportcard.com/report/github.com/munirmardinli/alertmanager-gotifyy)
 [![GitHub Release](https://img.shields.io/github/v/release/munirmardinli/alertmanager-gotify?include_prereleases&style=flat-square)](https://github.com/munirmardinli/alertmanager-gotify/releases)
 [![Last Commit](https://img.shields.io/github/last-commit/munirmardinli/alertmanager-gotify?style=flat-square)](https://github.com/munirmardinli/alertmanager-gotify/commits)
 [![Code Size](https://img.shields.io/github/languages/code-size/munirmardinli/alertmanager-gotify?style=flat-square)](https://github.com/munirmardinli/alertmanager-gotify)
-[![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/munirmardinli/alertmanager-gotify?style=flat-square)](https://snyk.io/test/github/munirmardinli/alertmanager-gotify)
-[![Maintenance](https://img.shields.io/maintenance/yes/2024?style=flat-square)](https://github.com/munirmardinli/alertmanager-gotify)[![GitHub Discussions](https://img.shields.io/github/discussions/munirmardinli/alertmanager-gotify?style=flat-square)](https://github.com/munirmardinli/alertmanager-gotify/discussions) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-
-[![Docker Pulls](https://img.shields.io/docker/pulls/technophilik/alertmanager-gotify)](https://hub.docker.com/r/technophilik/alertmanager-gotify)
-[![Go Report Card](https://goreportcard.com/badge/github.com/munirmardinli/alertmanager-gotify)](https://goreportcard.com/report/github.com/munirmardinli/alertmanager-gotify)
-[![CI/CD Status](https://img.shields.io/github/actions/workflow/status/munirmardinli/alertmanager-gotify/docker-build.yml?label=Build&style=flat-square)](https://github.com/munirmardinli/alertmanager-gotify/actions)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white)
 
 <a href="https://www.buymeacoffee.com/munirmardinli"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=munirmardinli&button_colour=40DCA5&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
+
+
+## 🚨 AlertManager Webhook Server Architecture
+
+```text
+┌───────────────────────────────────────────────────────────────────────┐
+│                        Alert Processing Server                        │
+│                                                                       │
+│  ┌───────────────────┐    ┌───────────────────┐    ┌───────────────┐  │
+│  │    Express App    │    │  Alert Processor  │    │   Gotify API  │  │
+│  │                   │    │                   │    │               │  │
+│  │ - REST Endpoints  │◄──►│ - Deduplication   │◄──►│ - Push Notif. │  │
+│  │ - Middlewares     │    │ - Cache Management│    │ - Priority    │  │
+│  └───────────────────┘    └───────────────────┘    └───────────────┘  │
+│                                                                       │
+│  ┌───────────────────┐                                                │
+│  │   Scheduled Jobs  │                                                │
+│  │                   │                                                │
+│  │ - Cache Cleanup   │                                                │
+│  └───────────────────┘                                                │
+│                                                                       │
+└───────────────────────────────────────────────────────────────────────┘
+```
 
 ## 🚀 Features
 
