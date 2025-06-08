@@ -1,0 +1,76 @@
+{
+	"name": "alertmanager-gotify",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"description": "Munir Mardinli's Alertmanager to Gotify Bridge - A powerful notification solution for forwarding Prometheus Alertmanager alerts to Gotify server with advanced features",
+	"homepage": "https://munirmardinli.github.io/alertmanager-gotify",
+	"bugs": {
+		"url": "https://github.com/munirmardinli/alertmanager-gotify/issues",
+		"email": "Munir@Mardinli.de"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/munirmardinli/alertmanager-gotify.git",
+		"directory": "Munir Mardinli DevOps Tools",
+		"homepage": "https://github.com/munirmardinli/alertmanager-gotify#readme"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Munir Mardinli",
+		"email": "Munir@Mardinli.de",
+		"url": "https://linktr.ee/munirmardinli"
+	},
+	"keywords": [
+		"Munir Mardinli",
+		"alertmanager gotify",
+		"prometheus notifications",
+		"devops tools by Munir Mardinli",
+		"real-time alert forwarding",
+		"munirmardinli open source",
+		"gotify webhook",
+		"monitoring solutions",
+		"alertmanager webhook",
+		"self-hosted notification system",
+		"typescript alert processor"
+	],
+	"funding": {
+		"type": "individual",
+		"url": "https://linktr.ee/munirmardinli"
+	},
+	"contributors": [
+		{
+			"name": "Munir Mardinli",
+			"email": "Munir@Mardinli.de",
+			"url": "https://linktr.ee/munirmardinli"
+		}
+	],
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsx watch src/index.ts",
+		"start": "node dist/src/index.js"
+	},
+	"devDependencies": {
+		"@types/cookie-parser": "^1.4.9",
+		"@types/express": "^5.0.3",
+		"@types/node": "^22.15.30",
+		"@types/node-schedule": "^2.1.7",
+		"@types/jest": "^29.5.14",
+		"ts-node": "^10.9.1",
+		"tsx": "^4.19.4",
+		"jest": "^29.7.0",
+		"ts-jest": "^29.3.4",
+		"typescript": "^5.8.3",
+		"typedoc": "^0.28.5",
+		"typedoc-plugin-extra-footer": "^1.0.4"
+	},
+	"dependencies": {
+		"axios": "^1.9.0",
+		"cookie-parser": "^1.4.7",
+		"cors": "^2.8.5",
+		"dayjs": "^1.11.10",
+		"dotenv": "^16.5.0",
+		"express": "^5.1.0",
+		"node-schedule": "^2.1.1"
+	}
+}

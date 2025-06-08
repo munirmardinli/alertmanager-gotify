@@ -1,0 +1,25 @@
+---
+services:
+  alertmanager-gotify:
+    image: ${GROUP:-technophilik}/alertmanager-gotify:${TAG:-latest}
+    container_name: alertmanager-gotify
+    hostname: alertmanager-gotify
+    restart: always
+    read_only: true
+    ports:
+      - ${GOTIFY_PORT:-9094}:9094
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      GOTIFY_ALERT_URL: ${GOTIFY_ALERT_URL?:App Token is missing}
+      GOTIFY_PORT: ${GOTIFY_PORT:-9094}
+      UID: ${UID_NAS_ADMIN:-1026}
+      GID: ${GID_NAS_ADMIN:-100}
+    networks:
+      dockerization:
+    labels:
+      com.centurylinklabs.watchtower.enable: true
+
+networks:
+  dockerization:
+    external: true

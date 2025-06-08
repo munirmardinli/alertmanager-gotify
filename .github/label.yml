@@ -1,0 +1,12 @@
+'type: bug':
+  - 'src/index.ts'
+
+'type: documentation':
+  - '**/*.md'
+
+'type: dependencies':
+  - 'package.json'
+  - 'package-lock.json'
+
+'ci: github-actions':
+  - '.github/workflows/**'

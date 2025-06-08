@@ -1,0 +1,51 @@
+name: 🐛 Bug Report
+description: Report a bug in the TypeScript code
+title: "[Bug] "
+labels: ["type: bug", "priority: needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Please describe the bug clearly and concisely.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What is happening vs. what should happen?
+      placeholder: |
+        Example:
+        "When calling X with parameter Y, the app crashes, although Z is expected."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can the bug be reproduced?
+      placeholder: |
+        1. Open page A
+        2. Click on button B
+        3. See error C
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Screenshots, logs, environment details (Node.js version, etc.)
+      placeholder: |
+        - Node.js version: [e.g. 20.4.0]
+        - Operating system: [Windows/macOS/Linux]
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - "🚨 Blocking (System unusable)"
+        - "⚠️ High (Functionality severely limited)"
+        - "🟡 Medium (Side effect)"
+        - "🔵 Low (Cosmetic)"
+    validations:
+      required: true

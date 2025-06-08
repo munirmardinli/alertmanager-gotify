@@ -1,0 +1,87 @@
+name: Development CI/CD Pipeline
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+
+env:
+  IMAGE_TAG: ${{ github.sha }}
+  VERSION: ${{ github.ref_name }}
+  BUILD_TIMESTAMP: ${{ github.event.timestamp }}
+  DOCKER_REGISTRY: ghcr.io
+  DOCKER_IMAGE_NAME: ${{ github.repository }}
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      node_modules_cache: ${{ steps.set-cache-output.outputs.cache-hit }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm ci
+      - name: Set cache output
+        id: set-cache-output
+        run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
+
+  lint:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+  build-dev:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      - name: Build application
+        run: |
+          npm run build
+        env:
+          NODE_ENV: development
+      - name: Prepare dist structure
+        run: |
+          mkdir -p dist/src
+          mv dist/*.{js,js.map,d.ts} dist/src/ 2>/dev/null || echo "No JS files to move"
+          [ -f "src/404.html" ] && cp src/404.html dist/404.html || echo "404.html not found"
+          ls -R dist
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-dev
+          path: |
+            dist
+            node_modules

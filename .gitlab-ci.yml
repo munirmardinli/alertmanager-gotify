@@ -1,0 +1,199 @@
+stages:
+ - prepare
+ - lint
+ - compile
+ - deploy
+
+variables:
+ IMAGE_TAG: "$CI_COMMIT_SHA"
+ VERSION: "$CI_COMMIT_REF_NAME"
+ BUILD_TIMESTAMP: "${CI_COMMIT_TIMESTAMP}"
+
+cache:
+ key:
+  files:
+   - package-lock.json
+ paths:
+  - node_modules
+  - .npmrc
+
+image: node:20-alpine
+
+install_alertmanager_packages:
+ stage: prepare
+ environment: DEV
+ rules:
+  - if: $CI_COMMIT_REF_NAME != "qa" && $CI_COMMIT_REF_NAME != "main"
+ script:
+  - npm ci
+
+compile_alertmanager_dev:
+ stage: compile
+ environment: DEV
+ variables:
+  NODE_ENV: "development"
+ rules:
+  - if: $CI_COMMIT_REF_NAME != "qa" && $CI_COMMIT_REF_NAME != "main"
+ script:
+  - npm run build
+ artifacts:
+  paths:
+   - dist
+ dependencies:
+  - install_alertmanager_packages
+
+install_alertmanager_packages_qa:
+ stage: prepare
+ environment: QA
+ rules:
+  - if: $CI_COMMIT_REF_NAME == "qa"
+ script:
+  - npm ci
+
+typecheck_alertmanager_qa:
+ stage: lint
+ environment: QA
+ rules:
+  - if: $CI_COMMIT_REF_NAME == "qa"
+ script:
+  - npx tsc --noEmit
+ dependencies:
+  - install_alertmanager_packages_qa
+ needs:
+  - install_alertmanager_packages_qa
+
+compile_alertmanager_qa:
+ stage: compile
+ variables:
+  NODE_ENV: "test"
+ environment: QA
+ rules:
+  - if: $CI_COMMIT_REF_NAME == "qa"
+ script:
+  - npm run build
+ artifacts:
+  paths:
+   - dist
+ dependencies:
+  - typecheck_alertmanager_qa
+
+deploy_alertmanager_qa:
+ stage: deploy
+ environment: QA
+ variables:
+  NODE_ENV: "test"
+ rules:
+  - if: $CI_COMMIT_REF_NAME == "qa"
+ image:
+  name: gcr.io/kaniko-project/executor:v1.14.0-debug
+  entrypoint: [""]
+ script:
+  - /kaniko/executor
+    --skip-tls-verify
+    --context "${CI_PROJECT_DIR}"
+    --dockerfile "Dockerfile"
+    --build-arg NODE_ENV=test
+    --build-arg VERSION="$VERSION"
+    --build-arg BUILD_TIMESTAMP="$BUILD_TIMESTAMP"
+    --destination "${CI_REGISTRY_IMAGE}/alertmanager-qa:latest"
+ dependencies:
+  - compile_alertmanager_qa
+
+install_alertmanager_packages_prod:
+ stage: prepare
+ environment: PROD
+ rules:
+  - if: $CI_COMMIT_REF_NAME == "main"
+ script:
+  - npm ci
+
+typecheck_alertmanager_prod:
+ stage: lint
+ environment: PROD
+ rules:
+  - if: $CI_COMMIT_REF_NAME == "main"
+ script:
+  - npx tsc --noEmit
+ dependencies:
+  - install_alertmanager_packages_prod
+ needs:
+  - install_alertmanager_packages_prod
+
+compile_alertmanager_prod:
+ stage: compile
+ variables:
+  GOTIFY_PORT: "9094"
+  NODE_ENV: "production"
+  UID: "1026"
+  GID: "100"
+ environment: PROD
+ rules:
+  - if: $CI_COMMIT_REF_NAME == "main"
+ script:
+  - export BUILD_TIMESTAMP=$(date --utc +'%Y-%m-%dT%H:%M:%SZ')
+  - echo "BUILD_TIMESTAMP=$BUILD_TIMESTAMP"
+  - npm run build
+ artifacts:
+  paths:
+   - dist
+ dependencies:
+  - typecheck_alertmanager_prod
+
+deploy_alertmanager_prod:
+ stage: deploy
+ environment: PROD
+ variables:
+  GOTIFY_PORT: "9094"
+  NODE_ENV: "production"
+  UID: "1026"
+  GID: "100"
+ rules:
+  - if: $CI_COMMIT_REF_NAME == "main"
+ image:
+  name: gcr.io/kaniko-project/executor:v1.14.0-debug
+  entrypoint: [""]
+ script:
+  - /kaniko/executor
+    --skip-tls-verify
+    --context "${CI_PROJECT_DIR}"
+    --dockerfile "Dockerfile"
+    --build-arg NODE_ENV=production
+    --build-arg VERSION="$VERSION"
+    --build-arg BUILD_TIMESTAMP="$BUILD_TIMESTAMP"
+    --destination "${CI_REGISTRY_IMAGE}/alertmanager-prod:latest"
+ dependencies:
+  - compile_alertmanager_prod
+
+docker_alertmanager_prod:
+ stage: deploy
+ image: docker:latest
+ variables:
+  GOTIFY_PORT: "9094"
+  NODE_ENV: "production"
+  UID: "1026"
+  GID: "100"
+  GOTIFY_URL: "$GOTIFY_URL"
+ services:
+  - name: docker:dind
+    command: ["--host=unix:///var/run/docker.sock"]
+ environment: PROD
+ rules:
+  - if: $CI_COMMIT_REF_NAME == "main"
+ script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
+  - docker pull "$CI_REGISTRY_IMAGE/alertmanager-prod:latest"
+  - docker tag "$CI_REGISTRY_IMAGE/alertmanager-prod:latest" "technophilik/alertmanager-gotify:latest"
+  - docker push "technophilik/alertmanager-gotify:latest"
+  - echo "Docker-Image 🐋 für die Produktion wurde erfolgreich hochgeladen."
+  - apk add --no-cache curl
+  - >
+   curl -X POST "$GOTIFY_URL"
+   -F "token=$GOTIFY_TOKEN"
+   -F "title=Docker Build Alertmanager"
+   -F "message=Image technophilik/alertmanager-gotify:latest wurde erfolgreich auf DockerHub gepusht."
+   -F "priority=5"
+ dependencies:
+  - deploy_alertmanager_prod
+ needs:
+  - deploy_alertmanager_prod

@@ -1,0 +1,189 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPointStrategy": "expand",
+  "name": "Alertmanager-Gotify",
+  "lang": "en",
+  "out": "dist/docs",
+  "theme": "default",
+  "logLevel": "Verbose",
+  "entryPoints": ["src"],
+  "hostedBaseUrl": "https://munirmardinli.github.io/alertmanager-gotify",
+  "titleLink": "https://munirmardinli.github.io/alertmanager-gotify",
+  "gitRevision": "main",
+  "categoryOrder": ["Reflections", "Types", "Comments", "*"],
+  "groupOrder": ["Common", "Namespaces", "Variables", "Functions", "*"],
+  "json": "dist/docs/docs.json",
+  "darkHighlightTheme": "dark-plus",
+  "includeHierarchySummary": true,
+  "disableGit": false,
+  "gitRemote": "origin",
+  "cacheBust": false,
+  "searchInComments": false,
+  "extraFooterNoDefaultWrapper": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": false,
+  "extraFooter": "&copy; 2025 <a href=\"https://munirmardinli.github.io/alertmanager-gotify\">Munir Mardinli</a>",
+  "cleanOutputDir": false,
+  "categorizeByGroup": false,
+  "hideGenerator": true,
+  "excludeExternals": true,
+  "searchInDocuments": true,
+  "useHostedBaseUrlForAbsoluteLinks": true,
+  "useFirstParagraphOfCommentAsSummary": false,
+  "includeVersion": true,
+  "ignoredHighlightLanguages": ["mkdocs"],
+  "blockTags": [
+    "@param",
+    "@returns",
+    "@description",
+    "@function",
+    "@name",
+    "@author",
+    "@version",
+    "@example",
+    "@type",
+    "@category",
+    "@property"
+  ],
+  "inlineTags": ["@link"],
+  "modifierTags": ["@alpha", "@beta", "@experimental"],
+  "treatWarningsAsErrors": false,
+  "groupReferencesByType": true,
+  "jsDocCompatibility": {
+    "exampleTag": true,
+    "defaultTag": true,
+    "inheritDocTag": true,
+    "ignoreUnescapedBraces": true
+  },
+  "packageOptions": {
+    "includeVersion": false,
+    "excludePrivate": false,
+    "sortEntryPoints": false,
+    "sort": "source-order",
+    "excludeExternals": true,
+    "gitRevision": "main"
+  },
+  "headings": {
+    "readme": true,
+    "document": false
+  },
+  "sluggerConfiguration": {
+    "lowercase": true
+  },
+  "markdownItOptions": {
+    "html": true,
+    "linkify": true
+  },
+  "searchGroupBoosts": {
+    "Interfaces": 2,
+    "Enumerations": 2,
+    "Type Aliases": 2
+  },
+  "navigationLeaves": ["JSONOutput"],
+  "outputs": [
+    {
+      "name": "html",
+      "path": "docs/docs.json",
+      "options": {
+        "navigation": {
+          "includeCategories": true,
+          "includeGroups": true,
+          "excludeReferences": false,
+          "includeFolders": true
+        }
+      }
+    }
+  ],
+  "visibilityFilters": {
+    "protected": false,
+    "private": false,
+    "inherited": false,
+    "external": false,
+    "@alpha": false,
+    "@beta": false
+  },
+  "navigation": {
+    "includeCategories": true,
+    "includeGroups": false,
+    "excludeReferences": true,
+    "includeFolders": true,
+    "compactFolders": false
+  },
+  "sort": [
+    "kind",
+    "instance-first",
+    "required-first",
+    "alphabetical-ignoring-documents"
+  ],
+  "navigationLinks": {
+    "Home": "https://munirmardinli.github.io/alertmanager-gotify",
+    "GitHub": "https://github.com/munirmardinli",
+    "Sitemap": "https://munirmardinli.github.io/alertmanager-gotify/sitemap.xml"
+  },
+  "validation": {
+    "notExported": false,
+    "invalidLink": true,
+    "rewrittenLink": true,
+    "notDocumented": false,
+    "unusedMergeModuleWith": true
+  },
+  "externalSymbolLinkMappings": {
+    "@types/markdown-it": {
+      "MarkdownIt": "https://markdown-it.github.io/markdown-it/#MarkdownIt"
+    }
+  },
+  "plugin": ["typedoc-plugin-extra-footer"],
+  "kindSortOrder": [
+    "Reference",
+    "Project",
+    "Module",
+    "Namespace",
+    "Enum",
+    "EnumMember",
+    "Interface",
+    "TypeAlias",
+    "Constructor",
+    "Property",
+    "Variable",
+    "Function",
+    "Accessor",
+    "Method",
+    "Parameter",
+    "TypeParameter",
+    "TypeLiteral",
+    "CallSignature",
+    "ConstructorSignature",
+    "IndexSignature",
+    "GetSignature",
+    "SetSignature"
+  ],
+  "requiredToBeDocumented": [
+    "Project",
+    "Module",
+    "Namespace",
+    "Enum",
+    "EnumMember",
+    "Variable",
+    "Function",
+    "Interface",
+    "Method",
+    "Accessor",
+    "TypeAlias"
+  ],
+  "highlightLanguages": [
+    "bash",
+    "console",
+    "css",
+    "html",
+    "javascript",
+    "json",
+    "jsonc",
+    "json5",
+    "yaml",
+    "tsx",
+    "typescript",
+    "dotenv",
+    "ini"
+  ]
+}

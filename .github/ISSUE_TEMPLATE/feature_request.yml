@@ -1,0 +1,47 @@
+name: ✨ Feature Request
+description: Suggest a new feature or improvement
+title: "[Feature] "
+labels: ["type: enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Please describe the desired feature.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What problem does this feature solve?
+      placeholder: |
+        "As a [role], I want to [goal], so that [benefit]."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Are there any existing workarounds or similar solutions?
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: Design/Code Examples
+      description: Sketches, pseudocode, or API designs
+      placeholder: |
+        ```typescript
+        // Sample code (optional)
+        interface NewFeatureOptions {
+          requiredParam: string;
+        }
+        ```
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - "🔥 Urgent (Business-critical)"
+        - "⭐ High (Important improvement)"
+        - "🔄 Medium (Nice-to-have)"

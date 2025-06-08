@@ -1,0 +1,137 @@
+name: QA CI/CD Pipeline
+on:
+ push:
+  branches:
+   - qa
+ pull_request:
+  branches:
+   - qa
+
+env:
+ IMAGE_TAG: qa
+ VERSION: ${{ github.ref_name }}
+ BUILD_TIMESTAMP: ${{ github.event.timestamp }}
+ DOCKER_REGISTRY: ghcr.io
+ DOCKER_IMAGE_NAME: ${{ github.repository }}
+
+permissions:
+ contents: read
+ packages: write
+
+jobs:
+ prepare:
+  runs-on: ubuntu-latest
+  outputs:
+   node_modules_cache: ${{ steps.set-cache-output.outputs.cache-hit }}
+  steps:
+   - uses: actions/checkout@v4
+   - name: Cache node modules
+     id: cache-node-modules
+     uses: actions/cache@v4
+     with:
+      path: |
+       node_modules
+       .npm
+      key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+      restore-keys: ${{ runner.os }}-node-
+   - name: Install dependencies
+     run: npm ci
+   - name: Set cache output
+     id: set-cache-output
+     run: echo "cache-hit=$(ls node_modules | wc -l | tr -d ' ')" >> $GITHUB_OUTPUT
+
+ lint:
+  needs: prepare
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - name: Restore cache
+     uses: actions/cache@v4
+     with:
+      path: |
+       node_modules
+       .npm
+      key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+   - name: Typecheck
+     run: npx tsc --noEmit
+
+ build-qa:
+  needs: lint
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - name: Restore cache
+     uses: actions/cache@v4
+     with:
+      path: |
+       node_modules
+       .npm
+      key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+   - name: Build application
+     run: |
+      npm run build
+     env:
+      NODE_ENV: test
+   - name: Upload artifacts
+     uses: actions/upload-artifact@v4
+     with:
+      name: dist-qa
+      path: |
+       dist
+       node_modules
+
+ docker-qa:
+  if: github.event_name == 'push'
+  needs: build-qa
+  runs-on: ubuntu-latest
+  permissions:
+   packages: write
+   contents: read
+  steps:
+   - uses: actions/checkout@v4
+   - name: Download artifacts
+     uses: actions/download-artifact@v4
+     with:
+      name: dist-qa
+      path: .
+   - name: Cache Docker layers
+     uses: actions/cache@v4
+     with:
+      path: /tmp/.buildx-cache
+      key: ${{ runner.os }}-buildx-${{ github.sha }}
+      restore-keys: |
+       ${{ runner.os }}-buildx-
+   - name: Set up Docker Buildx
+     uses: docker/setup-buildx-action@v3
+   - name: Log in to GitHub Container Registry
+     uses: docker/login-action@v3
+     with:
+      registry: ghcr.io
+      username: ${{ github.actor }}
+      password: ${{ secrets.GITHUB_TOKEN }}
+   - name: Extract metadata
+     id: meta
+     uses: docker/metadata-action@v5
+     with:
+      images: ghcr.io/${{ github.repository }}
+      tags: |
+       type=raw,value=latest-qa
+       type=raw,value=qa-${{ env.IMAGE_TAG }}
+   - name: Build and push Docker image
+     uses: docker/build-push-action@v6
+     with:
+      context: .
+      file: .github/Dockerfile
+      push: true
+      tags: ${{ steps.meta.outputs.tags }}
+      labels: ${{ steps.meta.outputs.labels }}
+      cache-from: type=local,src=/tmp/.buildx-cache
+      cache-to: type=local,dest=/tmp/.buildx-cache-new
+      build-args: |
+       NODE_ENV=test
+       VERSION=${{ env.VERSION }}
+       BUILD_TIMESTAMP=${{ env.BUILD_TIMESTAMP }}
+   - name: Move cache
+     run: |
+      rm -rf /tmp/.buildx-cache
+      mv /tmp/.buildx-cache-new /tmp/.buildx-cache
