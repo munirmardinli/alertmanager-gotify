@@ -12,7 +12,7 @@ env:
  VERSION: ${{ github.ref_name }}
  BUILD_TIMESTAMP: ${{ github.event.timestamp }}
  DOCKER_REGISTRY: ghcr.io
- DOCKER_IMAGE_NAME: alertmanager-gotify
+ DOCKER_IMAGE_NAME: ${{ github.repository }}
 
 permissions:
  contents: write
@@ -21,6 +21,14 @@ permissions:
  id-token: write
 
 jobs:
+ label-pr:
+  if: github.event_name == 'pull_request'
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/labeler@v5
+     with:
+      repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      configuration-path: .github/labeler.yml
  prepare:
   runs-on: ubuntu-latest
   outputs:
@@ -164,7 +172,7 @@ jobs:
       images: ghcr.io/${{ github.repository_owner }}/alertmanager-gotify
       tags: |
        type=raw,value=latest
-       type=raw,value=prod-${{ env.IMAGE_TAG }}
+       type=raw,value=${{ env.IMAGE_TAG }}
    - name: Build and push Docker image
      uses: docker/build-push-action@v6
      with:
