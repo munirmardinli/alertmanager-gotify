@@ -96,7 +96,7 @@ docker-compose -f server.yml up -d
 
 | Variable                       | Required | Default                 | Description                                                         |
 | ------------------------------ | -------- | ----------------------- | ------------------------------------------------------------------- |
-| `GOTIFY_URL`                   | Yes      | -                       | Full URL of your Gotify server (e.g., `https://gotify.example.com`) |
+| `GOTIFY_URL`                   | Yes      | -                       | Full URL of your Gotify server (e.g., `http://gotify/message?token=`) |
 | `GOTIFY_PORT`                  | No       | `9094`                  | Port for Gotify server (if not using default 80/443)                |
 | `GOTIFY_ALERT_URL`             | Yes      | `http://gotify`         | Fallback Gotify base URL (used if `GOTIFY_URL` not set)             |
 
@@ -109,7 +109,7 @@ docker-compose -f server.yml up -d
 
 ### Configuration Example
 
-1. Create `.env` file (or see [.env.example](.env.example)):
+1. Create `.env` file (or see [.env.example](github.com/munirmardinli/alertmanager-gotify/blob/main/.env.example)):
    ```ini
 	GOTIFY_ALERT_URL=http://gotify/message?token=
 	GOTIFY_PORT=4000
