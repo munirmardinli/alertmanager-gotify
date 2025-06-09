@@ -1,0 +1,39 @@
+name: Setup Labels
+on:
+ push:
+  branches:
+   - main
+ workflow_dispatch:
+
+jobs:
+ setup-labels:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Create Labels
+     uses: actions/github-script@v6
+     with:
+      script: |
+       const labels = [
+         { name: 'documentation', color: '0075ca', description: 'Änderungen an Dokumentation' },
+         { name: 'coding', color: '0e8a16', description: 'Code-Änderungen' },
+         { name: 'tests', color: 'ff9e1e', description: 'Test-Änderungen' },
+         { name: 'dependencies', color: 'd93f0b', description: 'Abhängigkeits-Updates' },
+         { name: 'configuration', color: '5319e7', description: 'Konfigurationsdateien' },
+         { name: 'workflow', color: 'bfdadc', description: 'CI/CD & Workflow-Änderungen' },
+       ];
+
+       for (const label of labels) {
+         try {
+           await github.rest.issues.createLabel({
+             owner: context.repo.owner,
+             repo: context.repo.repo,
+             ...label,
+           });
+         } catch (error) {
+           if (error.status === 422) {
+             console.log(`Label "${label.name}" existiert bereits.`);
+           } else {
+             throw error;
+           }
+         }
+       }
