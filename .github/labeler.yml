@@ -1,6 +1,3 @@
-# .github/labeler.yml
-# Konfiguration für actions/labeler@v5
-
 dokumentation:
   - changed-files:
     - any-glob-to-any-file: '**/*.md'
