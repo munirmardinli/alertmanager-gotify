@@ -1,0 +1,15 @@
+name: Sync Postman Collection
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'alertmanager-gotify.postman_collection.json'
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Postman Sync
+        run: |
+          echo "Collection updated in GitHub. Import manually in Postman via GitHub integration."

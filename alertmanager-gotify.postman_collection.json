@@ -1,0 +1,37 @@
+{
+	"info": {
+		"name": "AlertManager-Gotify Bridge API",
+		"description": "API for forwarding AlertManager alerts to Gotify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Forward Alert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"alerts\": [\n    {\n      \"status\": \"firing\",\n      \"labels\": {\n        \"alertname\": \"ExampleAlert\",\n        \"instance\": \"example.com\"\n      },\n      \"annotations\": {\n        \"description\": \"This is a test alert\",\n        \"summary\": \"Test alert summary\"\n      }\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9094/alert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9094",
+					"path": [
+						"alert"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
