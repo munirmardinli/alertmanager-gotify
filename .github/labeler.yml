@@ -1,3 +1,7 @@
+# Datei: .github/labeler.yml
+# Konfiguration für actions/labeler@v5
+
+# Dokumentation
 "dokumentation":
   - changed-files:
     - any-glob-to-any-file:
@@ -61,6 +65,7 @@
       - "jest.config.*"
       - "vitest.config.*"
 
+# Performance
 "performance":
   - changed-files:
     - any-glob-to-any-file:
@@ -69,6 +74,7 @@
       - "webpack.config.*"
       - "vite.config.*"
 
+# Sicherheit
 "sicherheit":
   - changed-files:
     - any-glob-to-any-file:
@@ -78,6 +84,7 @@
       - "Dockerfile*"
       - "docker-compose.*"
 
+# GitHub Actions / CI/CD
 "ci/cd":
   - changed-files:
     - any-glob-to-any-file:
@@ -86,6 +93,7 @@
       - "Dockerfile*"
       - "docker-compose.*"
 
+# Dependencies
 "dependencies":
   - changed-files:
     - any-glob-to-any-file:
@@ -99,6 +107,7 @@
       - "go.mod"
       - "go.sum"
 
+# Konfiguration
 "konfiguration":
   - changed-files:
     - any-glob-to-any-file:
