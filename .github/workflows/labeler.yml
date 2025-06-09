@@ -13,7 +13,7 @@ jobs:
   runs-on: ubuntu-latest
   steps:
    - uses: actions/checkout@v3
-   - uses: kentaro-m/auto-label@v3
+   - uses: kentaro-m/auto-label@main
      with:
       repo-token: ${{ secrets.GITHUB_TOKEN }}
-      configuration-path: .github/labeler.yml
+      config-path: .github/labeler.yml
