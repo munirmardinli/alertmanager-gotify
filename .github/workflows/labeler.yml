@@ -2,7 +2,7 @@ name: Pull Request Labeler
 
 on:
  pull_request:
-  types: [opened, synchronize]
+  types: [opened, synchronize, reopened]
 
 permissions:
  contents: read
@@ -12,8 +12,8 @@ jobs:
  label:
   runs-on: ubuntu-latest
   steps:
-   - name: Apply Labels
-     uses: actions/labeler@v5
+   - uses: actions/checkout@v3
+   - uses: kentaro-m/auto-label@v3
      with:
-      repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      repo-token: ${{ secrets.GITHUB_TOKEN }}
       configuration-path: .github/labeler.yml
