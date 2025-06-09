@@ -1,119 +1,17 @@
-# Datei: .github/labeler.yml
-# Konfiguration für actions/labeler@v5
-
-# Dokumentation
-"dokumentation":
+root:
   - changed-files:
-    - any-glob-to-any-file:
-      - "**/*.md"
-      - "docs/**/*"
-      - "*.md"
+      - any-glob-to-any-file: '*'
 
-# Frontend
-"frontend":
+code:
   - changed-files:
-    - any-glob-to-any-file:
-      - "src/components/**/*"
-      - "src/pages/**/*"
-      - "public/**/*"
-      - "**/*.css"
-      - "**/*.scss"
-      - "**/*.html"
-      - "**/*.vue"
-      - "**/*.jsx"
-      - "**/*.tsx"
+      - any-glob-to-any-file: 'src/**'
 
-# Backend
-"backend":
+Documentation:
   - changed-files:
-    - any-glob-to-any-file:
-      - "src/server/**/*"
-      - "src/api/**/*"
-      - "src/services/**/*"
-      - "src/controllers/**/*"
-      - "src/models/**/*"
-      - "src/middleware/**/*"
+      - any-glob-to-any-file: 'docs/**'
 
-# API
-"api":
-  - changed-files:
-    - any-glob-to-any-file:
-      - "src/api/**/*"
-      - "**/*api*"
-      - "openapi.yaml"
-      - "swagger.yaml"
+feature:
+  - head-branch: ['^feature', 'feature']
 
-# Datenbank
-"datenbank":
-  - changed-files:
-    - any-glob-to-any-file:
-      - "src/database/**/*"
-      - "migrations/**/*"
-      - "seeds/**/*"
-      - "**/*.sql"
-      - "prisma/**/*"
-
-# Tests
-"tests":
-  - changed-files:
-    - any-glob-to-any-file:
-      - "**/*.test.*"
-      - "**/*.spec.*"
-      - "tests/**/*"
-      - "test/**/*"
-      - "__tests__/**/*"
-      - "jest.config.*"
-      - "vitest.config.*"
-
-# Performance
-"performance":
-  - changed-files:
-    - any-glob-to-any-file:
-      - "**/*performance*"
-      - "**/*benchmark*"
-      - "webpack.config.*"
-      - "vite.config.*"
-
-# Sicherheit
-"sicherheit":
-  - changed-files:
-    - any-glob-to-any-file:
-      - "**/*security*"
-      - "**/*auth*"
-      - ".github/workflows/**/*"
-      - "Dockerfile*"
-      - "docker-compose.*"
-
-# GitHub Actions / CI/CD
-"ci/cd":
-  - changed-files:
-    - any-glob-to-any-file:
-      - ".github/workflows/**/*"
-      - ".github/actions/**/*"
-      - "Dockerfile*"
-      - "docker-compose.*"
-
-# Dependencies
-"dependencies":
-  - changed-files:
-    - any-glob-to-any-file:
-      - "package.json"
-      - "package-lock.json"
-      - "yarn.lock"
-      - "pnpm-lock.yaml"
-      - "requirements.txt"
-      - "Pipfile*"
-      - "poetry.lock"
-      - "go.mod"
-      - "go.sum"
-
-# Konfiguration
-"konfiguration":
-  - changed-files:
-    - any-glob-to-any-file:
-      - "*.config.*"
-      - ".*rc"
-      - ".*rc.*"
-      - ".env*"
-      - "tsconfig.json"
-      - "jsconfig.json"
+release:
+  - base-branch: 'main'
