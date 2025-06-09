@@ -1,25 +1,26 @@
 name: Semantic PR Check
 
 on:
- pull_request_target:
-  types: [opened, edited, synchronize]
+  pull_request_target:
+    types: [opened, edited, synchronize]
 
 permissions:
- contents: read
- pull-requests: write
+  contents: read
+  pull-requests: write
 
 jobs:
- semantic_check:
-  runs-on: ubuntu-latest
-  steps:
-   - name: Validate PR Title
-     uses: amannn/action-semantic-pull-request@v5
-     with:
-      types: |
-       fix
-       feat
-       chore
-       docs
-       ci
-      require_scope: false
-      validate_single_commit: false
+  semantic_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR Title
+        uses: amannn/action-semantic-pull-request@v5
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          types: |
+            fix
+            feat
+            chore
+            docs
+            ci
+          requireScope: false
+          validateSingleCommit: false
