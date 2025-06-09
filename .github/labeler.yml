@@ -1,15 +1,15 @@
 bug:
-  - "src/index.ts"
-  - "src/**/*.ts"
+  - src/index.ts
+  - src/**/*.ts
 
 documentation:
-  - "**/*.md"
-  - "docs/**"
+  - '**/*.md'
+  - docs/**
 
 dependencies:
-  - "package.json"
-  - "package-lock.json"
-  - "yarn.lock"
+  - package.json
+  - package-lock.json
+  - yarn.lock
 
 ci:
-  - ".github/workflows/*.yml"
+  - .github/workflows/*.yml
