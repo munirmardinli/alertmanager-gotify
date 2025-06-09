@@ -21,6 +21,15 @@ permissions:
  id-token: write
 
 jobs:
+ label-pr:
+  if: github.event_name == 'pull_request'
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - uses: actions/labeler@v5
+     with:
+      repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      configuration-path: .github/labels.yml
  prepare:
   runs-on: ubuntu-latest
   outputs:
