@@ -1,15 +1,41 @@
-name: Licensed
+name: Licensed Check
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
+    branches: [main]
+  push:
+    branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  call-licensed:
-    name: Licensed
-    uses: actions/reusable-workflows/.github/workflows/licensed.yml@main
+  licensed:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Ruby & licensed
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler-cache: false
+
+      - name: Install licensed
+        run: gem install licensed
+
+      - name: Run licensed
+        run: |
+          licensed cache
+          licensed status

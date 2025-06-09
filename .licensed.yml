@@ -1,0 +1,24 @@
+source_path: .
+cache_path: .licenses/cache
+
+apps:
+  - name: alertmanager-gotify
+    source_path: .
+    package_manager: npm
+    ignored:
+      - node_modules/**
+      - dist/**
+      - coverage/**
+      - .github/**
+      - .vscode/**
+      - test/**
+    allowed:
+      licenses:
+        - MIT
+        - ISC
+        - Apache-2.0
+        - BSD-2-Clause
+        - BSD-3-Clause
+        - CC0-1.0
+        - Unlicense
+        - MPL-2.0
