@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 import axios from 'axios';
 import schedule from 'node-schedule';
 import dayjs from 'dayjs';
-import { type Alert, AlertManagerPayload } from './types/alert';
+import { type Alert, type AlertManagerPayload } from './types/alert';
 
 /**
  * Main server class for handling AlertManager webhooks and forwarding alerts to Gotify.

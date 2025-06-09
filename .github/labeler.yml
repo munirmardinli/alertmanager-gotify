@@ -1,69 +1,41 @@
 dokumentation:
-  - changed-files:
-    - any-glob-to-any-file: '**/*.md'
-  - changed-files:
-    - any-glob-to-any-file: 'docs/**'
+ - changed-files:
+    - any-glob-to-any-file: "**/*.md"
+ - changed-files:
+    - any-glob-to-any-file: alertmanager-gotify.postman_collection.json
+ - changed-files:
+    - any-glob-to-any-file: "README.md"
 
-frontend:
-  - changed-files:
-    - any-glob-to-any-file: 'src/components/**'
-  - changed-files:
-    - any-glob-to-any-file: 'src/pages/**'
-  - changed-files:
-    - any-glob-to-any-file: 'public/**'
-  - changed-files:
-    - any-glob-to-any-file: '**/*.css'
-  - changed-files:
-    - any-glob-to-any-file: '**/*.scss'
-  - changed-files:
-    - any-glob-to-any-file: '**/*.html'
-
-backend:
-  - changed-files:
-    - any-glob-to-any-file: 'src/server/**'
-  - changed-files:
-    - any-glob-to-any-file: 'src/api/**'
-  - changed-files:
-    - any-glob-to-any-file: 'src/services/**'
-  - changed-files:
-    - any-glob-to-any-file: 'src/controllers/**'
+codeing:
+ - changed-files:
+    - any-glob-to-any-file: "src/index.ts"
 
 tests:
-  - changed-files:
-    - any-glob-to-any-file: '**/*.test.*'
-  - changed-files:
-    - any-glob-to-any-file: '**/*.spec.*'
-  - changed-files:
-    - any-glob-to-any-file: 'tests/**'
-  - changed-files:
-    - any-glob-to-any-file: 'test/**'
-  - changed-files:
-    - any-glob-to-any-file: '__tests__/**'
+ - changed-files:
+    - any-glob-to-any-file: "**/*.test.*"
 
 dependencies:
-  - changed-files:
-    - any-glob-to-any-file: 'package.json'
-  - changed-files:
-    - any-glob-to-any-file: 'package-lock.json'
-  - changed-files:
-    - any-glob-to-any-file: 'yarn.lock'
+ - changed-files:
+    - any-glob-to-any-file: "package.json"
+ - changed-files:
+    - any-glob-to-any-file: "package-lock.json"
 
-konfiguration:
-  - changed-files:
-    - any-glob-to-any-file: '*.config.*'
-  - changed-files:
-    - any-glob-to-any-file: 'tsconfig.json'
-  - changed-files:
-    - any-glob-to-any-file: 'jsconfig.json'
-  - changed-files:
-    - any-glob-to-any-file: '.env*'
+configuration:
+ - changed-files:
+    - any-glob-to-any-file: "*.config.*"
+ - changed-files:
+    - any-glob-to-any-file: "tsconfig.json"
+ - changed-files:
+    - any-glob-to-any-file: ".env*"
+ - changed-files:
+    - any-glob-to-any-file: "dotenv.d.ts"
 
 workflow:
-  - changed-files:
-    - any-glob-to-any-file: '.github/workflows/**'
-  - changed-files:
-    - any-glob-to-any-file: '.github/actions/**'
-  - changed-files:
-    - any-glob-to-any-file: 'Dockerfile*'
-  - changed-files:
-    - any-glob-to-any-file: 'docker-compose.*'
+ - changed-files:
+    - any-glob-to-any-file: ".github/workflows/**"
+ - changed-files:
+    - any-glob-to-any-file: ".github/actions/**"
+ - changed-files:
+    - any-glob-to-any-file: "Dockerfile*"
+ - changed-files:
+    - any-glob-to-any-file: "server.yml"
