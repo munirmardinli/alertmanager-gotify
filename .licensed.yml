@@ -1,12 +1,9 @@
-sources:
-  npm:
-    enabled: true
-    dependencies_file: package-lock.json
+name: alertmanager-gotify
+cache_path: .licenses/cache
 
 apps:
   - name: alertmanager-gotify
     path: .
-    cache_path: .licenses/cache
     sources:
       - npm
     allow:
