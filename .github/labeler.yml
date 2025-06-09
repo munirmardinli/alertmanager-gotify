@@ -1,0 +1,110 @@
+"dokumentation":
+  - changed-files:
+    - any-glob-to-any-file:
+      - "**/*.md"
+      - "docs/**/*"
+      - "*.md"
+
+# Frontend
+"frontend":
+  - changed-files:
+    - any-glob-to-any-file:
+      - "src/components/**/*"
+      - "src/pages/**/*"
+      - "public/**/*"
+      - "**/*.css"
+      - "**/*.scss"
+      - "**/*.html"
+      - "**/*.vue"
+      - "**/*.jsx"
+      - "**/*.tsx"
+
+# Backend
+"backend":
+  - changed-files:
+    - any-glob-to-any-file:
+      - "src/server/**/*"
+      - "src/api/**/*"
+      - "src/services/**/*"
+      - "src/controllers/**/*"
+      - "src/models/**/*"
+      - "src/middleware/**/*"
+
+# API
+"api":
+  - changed-files:
+    - any-glob-to-any-file:
+      - "src/api/**/*"
+      - "**/*api*"
+      - "openapi.yaml"
+      - "swagger.yaml"
+
+# Datenbank
+"datenbank":
+  - changed-files:
+    - any-glob-to-any-file:
+      - "src/database/**/*"
+      - "migrations/**/*"
+      - "seeds/**/*"
+      - "**/*.sql"
+      - "prisma/**/*"
+
+# Tests
+"tests":
+  - changed-files:
+    - any-glob-to-any-file:
+      - "**/*.test.*"
+      - "**/*.spec.*"
+      - "tests/**/*"
+      - "test/**/*"
+      - "__tests__/**/*"
+      - "jest.config.*"
+      - "vitest.config.*"
+
+"performance":
+  - changed-files:
+    - any-glob-to-any-file:
+      - "**/*performance*"
+      - "**/*benchmark*"
+      - "webpack.config.*"
+      - "vite.config.*"
+
+"sicherheit":
+  - changed-files:
+    - any-glob-to-any-file:
+      - "**/*security*"
+      - "**/*auth*"
+      - ".github/workflows/**/*"
+      - "Dockerfile*"
+      - "docker-compose.*"
+
+"ci/cd":
+  - changed-files:
+    - any-glob-to-any-file:
+      - ".github/workflows/**/*"
+      - ".github/actions/**/*"
+      - "Dockerfile*"
+      - "docker-compose.*"
+
+"dependencies":
+  - changed-files:
+    - any-glob-to-any-file:
+      - "package.json"
+      - "package-lock.json"
+      - "yarn.lock"
+      - "pnpm-lock.yaml"
+      - "requirements.txt"
+      - "Pipfile*"
+      - "poetry.lock"
+      - "go.mod"
+      - "go.sum"
+
+"konfiguration":
+  - changed-files:
+    - any-glob-to-any-file:
+      - "*.config.*"
+      - ".*rc"
+      - ".*rc.*"
+      - ".env*"
+      - "tsconfig.json"
+      - "jsconfig.json"
