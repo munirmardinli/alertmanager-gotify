@@ -1,15 +1,19 @@
 bug:
-  - src/index.ts
-  - src/**/*.ts
+  - paths:
+      - src/index.ts
+      - src/**/*.ts
 
 documentation:
-  - '**/*.md'
-  - docs/**
+  - paths:
+      - '**/*.md'
+      - docs/**
 
 dependencies:
-  - package.json
-  - package-lock.json
-  - yarn.lock
+  - paths:
+      - package.json
+      - package-lock.json
+      - yarn.lock
 
 ci:
-  - .github/workflows/*.yml
+  - paths:
+      - .github/workflows/*.yml
