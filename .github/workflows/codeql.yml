@@ -11,7 +11,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: "0 3 * * 0"  # Korrigiert: Sonntags um 3 Uhr
+    - cron: "0 3 * * 0"
 
 jobs:
   analyze:
