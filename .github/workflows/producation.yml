@@ -19,15 +19,19 @@ permissions:
  packages: write
  pages: write
  id-token: write
+ pull-requests: write
 
 jobs:
  label-pr:
   if: github.event_name == 'pull_request'
   runs-on: ubuntu-latest
+  permissions:
+    contents: write
   steps:
+   - uses: actions/checkout@v4
    - uses: actions/labeler@v5
      with:
-      repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      repo-token: ${{ secrets.PULL_REQEST }}
       configuration-path: .github/labeler.yml
  prepare:
   runs-on: ubuntu-latest
