@@ -1,19 +1,19 @@
 root:
- - changed-files:
-    - any-glob-to-any-file: "*"
+  - changed-files:
+      - any-glob-to-any-file: '*'
 
 code:
- - changed-files:
-    - any-glob-to-any-file: "src/**"
+  - changed-files:
+      - any-glob-to-any-file: 'src/**'
 
 Documentation:
- - changed-files:
-    - any-glob-to-any-file: "docs/**"
+  - changed-files:
+      - any-glob-to-any-file: 'docs/**'
 
 feature:
- - head-branch:
-    - "^feature"
-    - "feature"
+  - head-branch:
+      - '^feature'
+      - 'feature'
 
 release:
- - base-branch: "main"
+  - base-branch: 'main'
