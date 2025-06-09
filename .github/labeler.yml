@@ -1,44 +1,72 @@
 # .github/labeler.yml
-# Einfache Konfiguration für actions/labeler@v5
+# Konfiguration für actions/labeler@v5
 
 dokumentation:
-- '**/*.md'
-- 'docs/**'
+  - changed-files:
+    - any-glob-to-any-file: '**/*.md'
+  - changed-files:
+    - any-glob-to-any-file: 'docs/**'
 
 frontend:
-- 'src/components/**'
-- 'src/pages/**'
-- 'public/**'
-- '**/*.css'
-- '**/*.scss'
-- '**/*.html'
+  - changed-files:
+    - any-glob-to-any-file: 'src/components/**'
+  - changed-files:
+    - any-glob-to-any-file: 'src/pages/**'
+  - changed-files:
+    - any-glob-to-any-file: 'public/**'
+  - changed-files:
+    - any-glob-to-any-file: '**/*.css'
+  - changed-files:
+    - any-glob-to-any-file: '**/*.scss'
+  - changed-files:
+    - any-glob-to-any-file: '**/*.html'
 
 backend:
-- 'src/server/**'
-- 'src/api/**'
-- 'src/services/**'
-- 'src/controllers/**'
+  - changed-files:
+    - any-glob-to-any-file: 'src/server/**'
+  - changed-files:
+    - any-glob-to-any-file: 'src/api/**'
+  - changed-files:
+    - any-glob-to-any-file: 'src/services/**'
+  - changed-files:
+    - any-glob-to-any-file: 'src/controllers/**'
 
 tests:
-- '**/*.test.*'
-- '**/*.spec.*'
-- 'tests/**'
-- 'test/**'
-- '__tests__/**'
+  - changed-files:
+    - any-glob-to-any-file: '**/*.test.*'
+  - changed-files:
+    - any-glob-to-any-file: '**/*.spec.*'
+  - changed-files:
+    - any-glob-to-any-file: 'tests/**'
+  - changed-files:
+    - any-glob-to-any-file: 'test/**'
+  - changed-files:
+    - any-glob-to-any-file: '__tests__/**'
 
 dependencies:
-- 'package.json'
-- 'package-lock.json'
-- 'yarn.lock'
+  - changed-files:
+    - any-glob-to-any-file: 'package.json'
+  - changed-files:
+    - any-glob-to-any-file: 'package-lock.json'
+  - changed-files:
+    - any-glob-to-any-file: 'yarn.lock'
 
 konfiguration:
-- '*.config.*'
-- 'tsconfig.json'
-- 'jsconfig.json'
-- '.env*'
+  - changed-files:
+    - any-glob-to-any-file: '*.config.*'
+  - changed-files:
+    - any-glob-to-any-file: 'tsconfig.json'
+  - changed-files:
+    - any-glob-to-any-file: 'jsconfig.json'
+  - changed-files:
+    - any-glob-to-any-file: '.env*'
 
 workflow:
-- '.github/workflows/**'
-- '.github/actions/**'
-- 'Dockerfile*'
-- 'docker-compose.*'
+  - changed-files:
+    - any-glob-to-any-file: '.github/workflows/**'
+  - changed-files:
+    - any-glob-to-any-file: '.github/actions/**'
+  - changed-files:
+    - any-glob-to-any-file: 'Dockerfile*'
+  - changed-files:
+    - any-glob-to-any-file: 'docker-compose.*'
