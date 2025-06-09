@@ -1,27 +1,31 @@
 name: Docker Linting
 
 on:
-  push:
-    paths:
-      - '.github/Dockerfile'
-      - '*.yml'
-  pull_request:
-    paths:
-      - '.github/Dockerfile'
+ push:
+  paths:
+   - ".github/Dockerfile"
+   - "*.yml"
+   - ".hadolint.yaml"
+ pull_request:
+  paths:
+   - ".github/Dockerfile"
+   - ".hadolint.yaml"
+
+permissions:
+ contents: read
 
 jobs:
-  hadolint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+ hadolint:
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
 
-      - name: Run Hadolint
-        uses: hadolint/hadolint-action@v3
-        with:
-          dockerfile: .github/Dockerfile
-          failure-threshold: warning
+   - name: Run Hadolint
+     uses: hadolint/hadolint-action@v3.0.0
+     with:
+      dockerfile: .github/Dockerfile
 
-      - name: Check Docker Compose
-        uses: docker/compose-cli-action@v3
-        with:
-          command: config
+   - name: Check Docker Compose
+     uses: docker/compose-action@v3
+     with:
+      command: config
