@@ -13,6 +13,6 @@
   //"skipDefaultLibCheck": true,
   //"erasableSyntaxOnly": true
  },
- "include": ["src/**/*", "node_modules/@types"],
+ "include": ["src/**/*", "node_modules/@types","dotenv.d.ts"],
  "exclude": ["node_modules","src/index.test.ts"]
 }

@@ -109,7 +109,7 @@ docker-compose -f server.yml up -d
 
 ### Configuration Example
 
-1. Create `.env` file (or see [.env.example](github.com/munirmardinli/alertmanager-gotify/blob/main/.env.example)):
+1. Create `.env` file:
    ```ini
 	GOTIFY_ALERT_URL=http://gotify/message?token=
 	GOTIFY_PORT=4000
