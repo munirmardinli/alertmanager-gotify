@@ -1,19 +1,44 @@
-root:
-  - changed-files:
-      - any-glob-to-any-file: '*'
+# .github/labeler.yml
+# Einfache Konfiguration für actions/labeler@v5
 
-code:
-  - changed-files:
-      - any-glob-to-any-file: 'src/**'
+dokumentation:
+- '**/*.md'
+- 'docs/**'
 
-Documentation:
-  - changed-files:
-      - any-glob-to-any-file: 'docs/**'
+frontend:
+- 'src/components/**'
+- 'src/pages/**'
+- 'public/**'
+- '**/*.css'
+- '**/*.scss'
+- '**/*.html'
 
-feature:
-  - head-branch:
-      - '^feature'
-      - 'feature'
+backend:
+- 'src/server/**'
+- 'src/api/**'
+- 'src/services/**'
+- 'src/controllers/**'
 
-release:
-  - base-branch: 'main'
+tests:
+- '**/*.test.*'
+- '**/*.spec.*'
+- 'tests/**'
+- 'test/**'
+- '__tests__/**'
+
+dependencies:
+- 'package.json'
+- 'package-lock.json'
+- 'yarn.lock'
+
+konfiguration:
+- '*.config.*'
+- 'tsconfig.json'
+- 'jsconfig.json'
+- '.env*'
+
+workflow:
+- '.github/workflows/**'
+- '.github/actions/**'
+- 'Dockerfile*'
+- 'docker-compose.*'
