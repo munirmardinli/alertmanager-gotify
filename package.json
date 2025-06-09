@@ -3,6 +3,7 @@
 	"version": "1.0.1",
 	"private": true,
 	"type": "module",
+	"license": "MIT",
 	"description": "Munir Mardinli Alertmanager to Gotify Bridge - A powerful notification solution for forwarding Prometheus Alertmanager alerts to Gotify server with advanced features",
 	"homepage": "https://munirmardinli.github.io/alertmanager-gotify",
 	"bugs": {
@@ -15,7 +16,6 @@
 		"directory": "Munir Mardinli DevOps Tools",
 		"homepage": "https://github.com/munirmardinli/alertmanager-gotify#readme"
 	},
-	"license": "MIT",
 	"author": {
 		"name": "Munir Mardinli",
 		"email": "Munir@Mardinli.de",

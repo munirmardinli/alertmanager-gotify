@@ -1,24 +1,22 @@
-source_path: .
-cache_path: .licenses/cache
+sources:
+  npm:
+    enabled: true
+    dependencies_file: package-lock.json
 
 apps:
   - name: alertmanager-gotify
-    source_path: .
-    package_manager: npm
-    ignored:
-      - node_modules/**
-      - dist/**
-      - coverage/**
-      - .github/**
-      - .vscode/**
-      - test/**
-    allowed:
+    path: .
+    cache_path: .licenses/cache
+    sources:
+      - npm
+    allow:
       licenses:
-        - MIT
-        - ISC
-        - Apache-2.0
-        - BSD-2-Clause
-        - BSD-3-Clause
-        - CC0-1.0
-        - Unlicense
-        - MPL-2.0
+        - mit
+        - apache-2.0
+        - bsd-2-clause
+        - bsd-3-clause
+        - isc
+    ignore:
+      licenses:
+        - unknown
+        - other
