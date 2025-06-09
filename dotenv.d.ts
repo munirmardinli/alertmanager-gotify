@@ -4,7 +4,7 @@ declare namespace NodeJS {
 	 *
 	 * @interface ProcessEnv
 	 * @author Munir Mardinli <munir@mardinli.de>
-	 * @copyright 2023 Project Name (if applicable)
+	 * @copyright 2025 alertmanager-gotify
 	 * @license MIT
 	 * @version 1.0.0
 	 * @see {@link https://nodejs.org/api/process.html#processenv | Node.js `process.env`}
