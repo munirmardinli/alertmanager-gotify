@@ -31,7 +31,7 @@ jobs:
    - uses: actions/checkout@v4
    - uses: actions/labeler@v5
      with:
-      repo-token: ${{ secrets.PULL_REQUEST }}
+      repo-token: ${{ secrets.PULL_REQEST }}
       configuration-path: .github/labeler.yml
  prepare:
   runs-on: ubuntu-latest
