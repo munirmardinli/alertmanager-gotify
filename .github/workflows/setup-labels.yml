@@ -5,6 +5,10 @@ on:
    - main
  workflow_dispatch:
 
+permissions:
+ contents: write
+ issues: write
+
 jobs:
  setup-labels:
   runs-on: ubuntu-latest
