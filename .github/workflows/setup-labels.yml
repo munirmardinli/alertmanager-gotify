@@ -1,43 +1,79 @@
 name: Setup Labels
 on:
- push:
-  branches:
-   - main
- workflow_dispatch:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
- contents: write
- issues: write
+  contents: write
+  issues: write
 
 jobs:
- setup-labels:
-  runs-on: ubuntu-latest
-  steps:
-   - name: Create Labels
-     uses: actions/github-script@v6
-     with:
-      script: |
-       const labels = [
-         { name: 'documentation', color: '0075ca', description: 'Änderungen an Dokumentation' },
-         { name: 'coding', color: '0e8a16', description: 'Code-Änderungen' },
-         { name: 'tests', color: 'ff9e1e', description: 'Test-Änderungen' },
-         { name: 'dependencies', color: 'd93f0b', description: 'Abhängigkeits-Updates' },
-         { name: 'configuration', color: '5319e7', description: 'Konfigurationsdateien' },
-         { name: 'workflow', color: 'bfdadc', description: 'CI/CD & Workflow-Änderungen' },
-       ];
+  setup-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Missing Labels
+        uses: actions/github-script@v6
+        with:
+          script: |
+            // Define all possible labels with colors and descriptions
+            const allLabels = [
+              {
+                name: 'documentation',
+                color: '0075ca',
+                description: 'Changes to documentation files'
+              },
+              {
+                name: 'coding',
+                color: '0e8a16',
+                description: 'Changes to source code files'
+              },
+              {
+                name: 'tests',
+                color: 'ff9e1e',
+                description: 'Changes to test files'
+              },
+              {
+                name: 'dependencies',
+                color: 'd93f0b',
+                description: 'Changes to dependency files'
+              },
+              {
+                name: 'configuration',
+                color: '5319e7',
+                description: 'Changes to configuration files'
+              },
+              {
+                name: 'workflow',
+                color: 'bfdadc',
+                description: 'Changes to CI/CD workflows'
+              }
+            ];
 
-       for (const label of labels) {
-         try {
-           await github.rest.issues.createLabel({
-             owner: context.repo.owner,
-             repo: context.repo.repo,
-             ...label,
-           });
-         } catch (error) {
-           if (error.status === 422) {
-             console.log(`Label "${label.name}" existiert bereits.`);
-           } else {
-             throw error;
-           }
-         }
-       }
+            // Get existing labels
+            const existingLabels = await github.rest.issues.listLabelsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
+
+            const existingLabelNames = existingLabels.data.map(label => label.name);
+
+            // Create missing labels
+            for (const label of allLabels) {
+              if (!existingLabelNames.includes(label.name)) {
+                try {
+                  await github.rest.issues.createLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    ...label
+                  });
+                  console.log(`Created label: ${label.name}`);
+                } catch (error) {
+                  console.error(`Failed to create label ${label.name}:`, error.message);
+                }
+              } else {
+                console.log(`Label "${label.name}" already exists.`);
+              }
+            }
