@@ -1,15 +1,15 @@
 "type: bug":
- - src/index.ts
- - src/**/*.ts
+  - src/index.ts
+  - src/**/*.ts
 
 "type: documentation":
- - "**/*.md"
- - docs/**
+  - "**/*.md"
+  - docs/**
 
 "type: dependencies":
- - package.json
- - package-lock.json
- - yarn.lock
+  - package.json
+  - package-lock.json
+  - yarn.lock
 
 "ci: github-actions":
- - .github/workflows/*.yml
+  - .github/workflows/*.yml
